@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Spendly.Models"
+             x:Class="Spendly.Views.InsightsPage"
+             Style="{StaticResource Page}"
+             Shell.NavBarIsVisible="False">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,16,20,24" Spacing="16">
+            <!-- Title -->
+            <VerticalStackLayout Spacing="2">
+                <Label Text="Insights" Style="{StaticResource ScreenTitle}" />
+                <Label Text="Where your money goes" Style="{StaticResource ScreenSubtitle}" />
+            </VerticalStackLayout>
+            <!-- Three small stat cards -->
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+                <Border Grid.Column="0" Style="{StaticResource Card}" Padding="14">
+                    <VerticalStackLayout Spacing="2">
+                        <Label x:Name="TotalLabel" Text="R 0.00" Style="{StaticResource Money}"
+                               TextColor="{StaticResource Brand}" />
+                        <Label Text="Total spent" Style="{StaticResource Caption}" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Column="1" Style="{StaticResource Card}" Padding="14">
+                    <VerticalStackLayout Spacing="2">
+                        <Label x:Name="CountLabel" Text="0" Style="{StaticResource Money}" />
+                        <Label Text="Expenses" Style="{StaticResource Caption}" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Column="2" Style="{StaticResource Card}" Padding="14">
+                    <VerticalStackLayout Spacing="2">
+                        <Label x:Name="AverageLabel" Text="R 0.00" Style="{StaticResource Money}" />
+                        <Label Text="Average" Style="{StaticResource Caption}" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+            <!-- Shown only when there is no data -->
+            <Label x:Name="EmptyLabel" IsVisible="False"
+                   Text="Add a few expenses to see your insights."
+                   Style="{StaticResource Caption}" HorizontalOptions="Center" Margin="0,30" />
+            <!-- The biggest expense -->
+            <Label x:Name="BiggestTitle" Text="BIGGEST SPEND" Style="{StaticResource SectionTitle}" />
+            <Border x:Name="BiggestCard" Style="{StaticResource Card}" x:DataType="models:Expense">
+                <Grid ColumnDefinitions="48,*,Auto" ColumnSpacing="14">
+                    <Border WidthRequest="48" HeightRequest="48" StrokeThickness="0"
+                            StrokeShape="RoundRectangle 16" BackgroundColor="{Binding CategoryColor}">
+                        <Label Text="{Binding Initial}" Style="{StaticResource BadgeText}" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                        <Label Text="{Binding Title}" Style="{StaticResource CardTitle}"
+                               LineBreakMode="TailTruncation" />
+                        <Label Text="{Binding DateText}" Style="{StaticResource Caption}" />
+                    </VerticalStackLayout>
+                    <Label Grid.Column="2" Text="{Binding AmountText}"
+                           Style="{StaticResource Money}" VerticalOptions="Center" />
+                </Grid>
+            </Border>
+            <!-- One card per category, filled from the GROUP BY query -->
+            <Label x:Name="CategoryTitle" Text="BY CATEGORY" Style="{StaticResource SectionTitle}" />
+            <VerticalStackLayout x:Name="CategoryList" Spacing="10">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="models:CategoryTotal">
+                        <Border Style="{StaticResource Card}">
+                            <VerticalStackLayout Spacing="10">
+                                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                                    <Border WidthRequest="12" HeightRequest="12" StrokeThickness="0"
+                                            StrokeShape="RoundRectangle 6" VerticalOptions="Center"
+                                            BackgroundColor="{Binding CategoryColor}" />
+                                    <Label Grid.Column="1" Text="{Binding Category}"
+                                           Style="{StaticResource CardTitle}" />
+                                    <Label Grid.Column="2" Text="{Binding TotalText}"
+                                           Style="{StaticResource Money}" />
+                                </Grid>
+                                <ProgressBar Progress="{Binding Share}"
+                                             ProgressColor="{Binding CategoryColor}" />
+                                <Label Text="{Binding DetailText}" Style="{StaticResource Caption}" />
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

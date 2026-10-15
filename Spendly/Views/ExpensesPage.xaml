@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Spendly.Models"
+             x:Class="Spendly.Views.ExpensesPage"
+             Style="{StaticResource Page}"
+             Shell.NavBarIsVisible="False">
+    <Grid RowDefinitions="Auto,Auto,Auto,*" Padding="20,16,20,0" RowSpacing="16">
+        <!-- 1. Title -->
+        <VerticalStackLayout Grid.Row="0" Spacing="2">
+            <Label Text="Spendly" Style="{StaticResource ScreenTitle}" />
+            <Label Text="Track every rand you spend" Style="{StaticResource ScreenSubtitle}" />
+        </VerticalStackLayout>
+        <!-- 2. Summary card with a green-to-blue gradient -->
+        <Border Grid.Row="1" StrokeThickness="0" StrokeShape="RoundRectangle 24" Padding="22">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="{StaticResource Brand}" Offset="0.0" />
+                    <GradientStop Color="{StaticResource Accent}" Offset="1.0" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <VerticalStackLayout Spacing="4">
+                <Label Text="SPENT THIS MONTH"
+                       TextColor="#D1FAE5" FontFamily="OpenSansSemibold"
+                       FontSize="12" CharacterSpacing="1.2" />
+                <Label x:Name="MonthTotalLabel" Text="R 0.00"
+                       TextColor="White" FontFamily="OpenSansSemibold" FontSize="36" />
+                <Label x:Name="MonthCountLabel" Text=" "
+                       TextColor="#ECFEFF" FontSize="14" />
+            </VerticalStackLayout>
+        </Border>
+        <!-- 3. Section heading -->
+        <Label Grid.Row="2" Text="RECENT EXPENSES" Style="{StaticResource SectionTitle}" />
+        <!-- 4. The list of expenses (Read) -->
+        <CollectionView Grid.Row="3" x:Name="ExpensesCollection" SelectionMode="None">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+            </CollectionView.ItemsLayout>
+            <!-- Shown when the table is empty -->
+            <CollectionView.EmptyView>
+                <VerticalStackLayout Padding="0,40" Spacing="6">
+                   
+                    <Label Text="No expenses yet" Style="{StaticResource CardTitle}"
+                           HorizontalOptions="Center" />
+                    <Label Text="Tap + to add your first one." Style="{StaticResource Caption}"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+            <!-- Empty space under the last card, so the + button never covers it -->
+            <CollectionView.Footer>
+                <BoxView HeightRequest="96" Color="Transparent" />
+            </CollectionView.Footer>
+            <!-- The design for ONE expense -->
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Expense">
+                    <SwipeView>
+                        <!-- Swipe left to reveal Delete -->
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem Text="Delete"
+                                           BackgroundColor="{StaticResource Danger}"
+                                           Invoked="OnDeleteInvoked" />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        <Border Style="{StaticResource Card}">
+                            <!-- Tap a card to edit it -->
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnExpenseTapped" />
+                            </Border.GestureRecognizers>
+                            <Grid ColumnDefinitions="48,*,Auto" ColumnSpacing="14">
+                                <!-- Coloured category badge -->
+                                <Border Grid.Column="0" WidthRequest="48" HeightRequest="48"
+                                        StrokeThickness="0" StrokeShape="RoundRectangle 16"
+                                        BackgroundColor="{Binding CategoryColor}">
+                                    <Label Text="{Binding Initial}" Style="{StaticResource BadgeText}" />
+                                </Border>
+                                <!-- Title, category and date -->
+                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="2">
+                                    <Label Text="{Binding Title}" Style="{StaticResource CardTitle}"
+                                           LineBreakMode="TailTruncation" />
+                                    <Label Style="{StaticResource Caption}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Category}" />
+                                                <Span Text=" · " />
+                                                <Span Text="{Binding DateText}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </VerticalStackLayout>
+                                <!-- Amount -->
+                                <Label Grid.Column="2" Text="{Binding AmountText}"
+                                       Style="{StaticResource Money}" VerticalOptions="Center" />
+                            </Grid>
+                        </Border>
+                    </SwipeView>
+                    
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <!-- 5. Round + button floating over the list (Create) -->
+        <Button Grid.Row="3"
+                Text="+" FontSize="30" Padding="0"
+                WidthRequest="60" HeightRequest="60" CornerRadius="30"
+                BackgroundColor="{StaticResource Brand}" TextColor="White"
+                HorizontalOptions="End" VerticalOptions="End"
+                Margin="0,0,4,20"
+                Clicked="OnAddClicked">
+            <Button.Shadow>
+                <Shadow Brush="#059669" Opacity="0.35" Radius="16" Offset="0,6" />
+            </Button.Shadow>
+        </Button>
+    </Grid>
+</ContentPage>

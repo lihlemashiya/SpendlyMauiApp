@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:Spendly.Views"
+       x:Class="Spendly.AppShell"
+       Title="Sprendly"
+       Shell.FlyoutBehavior="Disabled"
+       Shell.BackgroundColor="{StaticResource PageBg}"
+       Shell.ForegroundColor="{StaticResource Ink}"
+       Shell.TitleColor="{StaticResource Ink}"
+       Shell.TabBarBackgroundColor="{StaticResource Surface}"
+       Shell.TabBarForegroundColor="{StaticResource Brand}"
+       Shell.TabBarUnselectedColor="{StaticResource Muted}">
+    <TabBar>
+        <ShellContent Title="Expenses"
+                      Icon="tab_expenses"
+                      Route="expenses"
+                      ContentTemplate="{DataTemplate views:ExpensesPage}"
+                      />
+        <ShellContent Title="Insights"
+                      Icon="tab_insights.png"
+                      Route="insights"
+                      ContentTemplate="{DataTemplate views:InsightsPage}"
+                      />
+
+
+    </TabBar>
+</Shell>

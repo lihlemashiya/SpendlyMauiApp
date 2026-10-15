@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+ xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+ xmlns:local="clr-namespace:Spendly"
+ x:Class="Spendly.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <!-- ===================== SPENDLY COLOUR PALETTE ===================== -->
+            <Color x:Key="Brand">#059669</Color>
+            <Color x:Key="BrandDark">#047857</Color>
+            <Color x:Key="BrandSoft">#D1FAE5</Color>
+            <Color x:Key="Accent">#0EA5E9</Color>
+            <Color x:Key="Danger">#E11D48</Color>
+            <Color x:Key="Ink">#0F172A</Color>
+            <Color x:Key="BodyInk">#475569</Color>
+            <Color x:Key="Muted">#94A3B8</Color>
+            <Color x:Key="PageBg">#F4F6FA</Color>
+            <Color x:Key="Surface">#FFFFFF</Color>
+            <Color x:Key="Line">#E8EBF2</Color>
+            <!-- ===================== REUSABLE STYLES ===================== -->
+            <!-- Every page gets the soft grey background -->
+            <Style x:Key="Page" TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="{StaticResource PageBg}" />
+            </Style>
+            <!-- White rounded card -->
+            <Style x:Key="Card" TargetType="Border">
+                <Setter Property="BackgroundColor" Value="{StaticResource Surface}" />
+                <Setter Property="Stroke" Value="{StaticResource Line}" />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 18" />
+                <Setter Property="Padding" Value="16" />
+            </Style>
+            <!-- White box around an input on the form -->
+            <Style x:Key="Field" TargetType="Border">
+                <Setter Property="BackgroundColor" Value="{StaticResource Surface}" />
+                <Setter Property="Stroke" Value="{StaticResource Line}" />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 14" />
+                <Setter Property="Padding" Value="12,2" />
+            </Style>
+            <!-- Big title at the top of a tab page -->
+            <Style x:Key="ScreenTitle" TargetType="Label">
+                <Setter Property="FontFamily" Value="OpenSansSemibold" />
+                <Setter Property="FontSize" Value="30" />
+                <Setter Property="TextColor" Value="{StaticResource Ink}" />
+            </Style>
+            <!-- Grey line under a screen title -->
+            <Style x:Key="ScreenSubtitle" TargetType="Label">
+                <Setter Property="FontFamily" Value="OpenSansRegular" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="TextColor" Value="{StaticResource Muted}" />
+            </Style>
+            <!-- Bold title inside a card -->
+            <Style x:Key="CardTitle" TargetType="Label">
+                <Setter Property="FontFamily" Value="OpenSansSemibold" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="TextColor" Value="{StaticResource Ink}" />
+            </Style>
+            <!-- Money amounts in a list -->
+            <Style x:Key="Money" TargetType="Label">
+                <Setter Property="FontFamily" Value="OpenSansSemibold" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="TextColor" Value="{StaticResource Ink}" />
+            </Style>
+            <!-- Small grey text (dates, categories, hints) -->
+            <Style x:Key="Caption" TargetType="Label">
+                <Setter Property="FontFamily" Value="OpenSansRegular" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="TextColor" Value="{StaticResource Muted}" />
+            </Style>
+            <!-- Small heading above a group, e.g. RECENT -->
+            <Style x:Key="SectionTitle" TargetType="Label">
+                <Setter Property="FontFamily" Value="OpenSansSemibold" />
+                <Setter Property="FontSize" Value="13" />
+                <Setter Property="CharacterSpacing" Value="1.2" />
+                <Setter Property="TextColor" Value="{StaticResource Muted}" />
+            </Style>
+            <!-- Label above each form field -->
+            <Style x:Key="FieldLabel" TargetType="Label">
+                <Setter Property="FontFamily" Value="OpenSansSemibold" />
+                <Setter Property="FontSize" Value="13" />
+                <Setter Property="TextColor" Value="{StaticResource BodyInk}" />
+                <Setter Property="Margin" Value="4,0,0,0" />
+            </Style>
+            <!-- Green main button -->
+            <Style x:Key="PrimaryButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource Brand}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontFamily" Value="OpenSansSemibold" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="CornerRadius" Value="14" />
+                <Setter Property="HeightRequest" Value="54" />
+            </Style>
+            <!-- Red outline button for Delete -->
+            <Style x:Key="DangerButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="TextColor" Value="{StaticResource Danger}" />
+                <Setter Property="BorderColor" Value="{StaticResource Danger}" />
+                <Setter Property="BorderWidth" Value="1.5" />
+                <Setter Property="FontFamily" Value="OpenSansSemibold" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="CornerRadius" Value="14" />
+                <Setter Property="HeightRequest" Value="54" />
+            </Style>
+            <!-- White letter inside a coloured circle -->
+            <Style x:Key="BadgeText" TargetType="Label">
+                <Setter Property="FontFamily" Value="OpenSansSemibold" />
+                <Setter Property="FontSize" Value="17" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
